@@ -4,8 +4,8 @@ import styles from '../../styles/todo.module.scss'; // 스타일 파일 import
 
 interface TodoContentProps {
   todoItem: TodoItemType | undefined;
-  handleClickUpdateButton: (title: string, content: string) => Promise<void>;
-  handleClickDeleteButton: () => Promise<void>;
+  handleClickUpdateButton: (title: string, content: string) => void;
+  handleClickDeleteButton: () => void;
 }
 
 export default function TodoContent({ todoItem, handleClickUpdateButton, handleClickDeleteButton }: TodoContentProps) {

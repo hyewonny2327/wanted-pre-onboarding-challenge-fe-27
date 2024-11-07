@@ -17,7 +17,15 @@ export type TodoItemType = {
   createdAt: string;
   updatedAt: string;
 };
-
+export type updateTodoProps = {
+  id: string;
+  title: string;
+  content: string;
+};
+export type createTodoProps = {
+  title: string;
+  content: string;
+};
 export async function getTodos(): Promise<TodoItemType[]> {
   const res = await todoApi.get('/todos');
 
@@ -29,7 +37,7 @@ export async function getTodoById(id: string): Promise<TodoItemType> {
   return res.data.data as TodoItemType;
 }
 
-export async function createTodo(title: string, content: string): Promise<TodoItemType> {
+export async function createTodo({ title, content }: createTodoProps): Promise<TodoItemType> {
   const res = await todoApi.post('/todos', {
     title: title,
     content: content,
@@ -37,7 +45,7 @@ export async function createTodo(title: string, content: string): Promise<TodoIt
   return res.data.data as TodoItemType;
 }
 
-export async function updateTodo(id: string, title: string, content: string) {
+export async function updateTodo({ id, title, content }: updateTodoProps) {
   const res = await todoApi.put(`/todos/${id}`, {
     title: title,
     content: content,

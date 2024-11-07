@@ -1,19 +1,18 @@
 import { useState } from 'react';
 import styles from '../../styles/todo.module.scss';
-import { createTodo } from '../../api/todoApi';
+import { UseMutationResult } from '@tanstack/react-query';
+import { createTodoProps, TodoItemType } from '../../api/todoApi';
 interface AddTodoProps {
-  getTodoList: () => void;
+  createTodoMutation: UseMutationResult<TodoItemType, Error, createTodoProps, unknown>;
 }
-export default function AddTodo({ getTodoList }: AddTodoProps) {
+export default function AddTodo({ createTodoMutation }: AddTodoProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
-  async function handleAddButtonClick() {
-    await createTodo(title, content);
+  function handleAddButtonClick() {
+    createTodoMutation.mutate({ title, content });
     initState();
-    //createTodo 를 하고나면 상위 컴포넌트의 getTodo 를 호출하여 다시 렌더링
-    getTodoList();
   }
   function initState() {
     setTitle('');
