@@ -1,14 +1,26 @@
 import { useState } from 'react';
 import styles from '../../styles/todo.module.scss';
 import { createTodo } from '../../api/todoApi';
-
-export default function AddTodo() {
+interface AddTodoProps {
+  getTodoList: () => void;
+}
+export default function AddTodo({ getTodoList }: AddTodoProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  async function addTodo() {
+
+  async function handleAddButtonClick() {
     await createTodo(title, content);
+    initState();
+    //createTodo 를 하고나면 상위 컴포넌트의 getTodo 를 호출하여 다시 렌더링
+    getTodoList();
   }
+  function initState() {
+    setTitle('');
+    setContent('');
+    setIsOpen(false);
+  }
+
   return (
     <section className={styles.todoInput__container}>
       <div className={styles.todoInput__description} onClick={() => setIsOpen(!isOpen)}>
@@ -29,7 +41,7 @@ export default function AddTodo() {
             value={content}
             onChange={(e) => setContent(e.target.value)}
           />
-          <button className={styles.todoInput__button} onClick={addTodo}>
+          <button className={styles.todoInput__button} onClick={handleAddButtonClick}>
             추가
           </button>
         </div>
