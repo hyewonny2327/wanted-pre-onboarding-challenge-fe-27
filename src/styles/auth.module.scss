@@ -1,0 +1,62 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.authToggle {
+  display: flex;
+  box-sizing: border-box;
+  border-radius: 10px;
+  justify-content: space-around;
+  border: 1px solid #f1f1f1;
+  cursor: pointer;
+  &__toggleButton {
+    width: 100%;
+    padding: 8px 40px;
+    text-align: center;
+    border-radius: 10px;
+  }
+  &__active {
+    background-color: black;
+    color: white;
+  }
+}
+
+.form {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+    margin-top: 40px;
+  }
+  &__label {
+    font-size: 12px;
+    color: #646f7c;
+  }
+  &__input {
+    border: 1px solid #646f7c;
+    border-radius: 10px;
+    //background-color: #f1f1f1;
+    padding: 13px 18px;
+    font-size: 16px;
+    &:focus {
+      border: 2px solid gray; /* 포커스 시 파란색 테두리 */
+      outline: none; /* 기본 outline 제거 */
+    }
+  }
+  &__submit {
+    margin-top: 40px;
+    font-size: 20px;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    &:disabled {
+      background-color: #f1f1f1;
+      color: #646f7c;
+    }
+  }
+}
